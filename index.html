@@ -1,0 +1,35 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>B2B Website for CONVEY</title>
+      <meta name="description" content="Showcasing reliable, license-free two-way radios, this B2B platform serves Indian enterprises with detailed product information and compliance assurance." />
+      <meta name="robots" content="index, follow" />
+      <meta name="theme-color" content="#8CC63F" />
+      <link rel="canonical" href="https://conveyindia.in/" />
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+      
+    </head>
+
+    <body>
+      <!-- Netlify detects this static definition at deploy time for the React form. -->
+      <form name="convey-inquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="convey-inquiry" />
+        <input name="bot-field" />
+        <input name="name" />
+        <input name="company" />
+        <input name="phone" />
+        <input name="email" />
+        <textarea name="requirement"></textarea>
+      </form>
+      
+      <div id="root"></div>
+      <script type="module" src="/src/main.tsx"></script>
+      
+    </body>
+  </html>
+  
