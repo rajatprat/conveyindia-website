@@ -133,8 +133,14 @@ export const Products = () => {
                   </div>
                   <div className="h-px w-full bg-gray-100 group-hover:bg-brand/30 transition-colors"></div>
                   <div className="mt-6 flex items-center justify-between">
-                    <span className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">PMR 446 Compliant</span>
-                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">WPC Approved</span>
+                    {product.category.startsWith("DMR") ? (
+                      <span className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">View Full Specifications</span>
+                    ) : (
+                      <>
+                        <span className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">PMR 446 Compliant</span>
+                        <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">WPC Approved</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </Link>

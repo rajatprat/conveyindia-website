@@ -11,6 +11,7 @@ import { Products } from "@/app/views/Products";
 import { ProductDetail } from "@/app/views/ProductDetail";
 import { About } from "@/app/views/About";
 import { Compliance } from "@/app/views/Compliance";
+import { Careers } from "@/app/views/Careers";
 import { Contact } from "@/app/views/Contact";
 import { Industries } from "@/app/views/Industries";
 import { Terms } from "@/app/views/Terms";
@@ -50,6 +51,7 @@ const App = () => {
               <Route path="/industries/:id" element={<Industries />} />
               <Route path="/about" element={<About />} />
               <Route path="/compliance" element={<Compliance />} />
+              <Route path="/careers" element={<Careers />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />

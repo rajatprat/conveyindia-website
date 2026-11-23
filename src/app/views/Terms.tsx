@@ -1,93 +1,15 @@
 import React from "react";
-import { Shield, FileText, Scale, AlertCircle } from "lucide-react";
-import { SEO } from "@/app/components/SEO";
+import { Link } from "react-router";
+import { LegalPage, LegalSection } from "@/app/components/LegalPage";
 
-export const Terms = () => {
-  return (
-    <div className="bg-white min-h-screen">
-      <SEO 
-        title="Terms & Conditions | CONVEY Regulatory Policy"
-        description="Review the legal framework for using CONVEY walkie talkies. Information on WPC regulatory compliance, intellectual property, and industrial usage terms in India."
-      />
-
-      {/* Editorial Header */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center space-x-4 mb-8">
-            <div className="h-px w-12 bg-brand"></div>
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-brand">Legal Framework</span>
-          </div>
-          <h1 className="text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
-            Terms & <span className="text-brand">Conditions</span>
-          </h1>
-          <p className="text-lg font-medium leading-relaxed text-gray-500 max-w-2xl">
-            Governing the professional use, distribution, and procurement of CONVEY wireless communication systems.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16">
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <Scale className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">1. Acceptance of Terms</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium">
-                By accessing this website and purchasing CONVEY products, you agree to be bound by these Terms and Conditions and all applicable laws and regulations in India. Micromap Electronic Systems Limited reserves the right to modify these terms at any time without prior notice.
-              </p>
-            </div>
-
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <Shield className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">2. Regulatory Compliance</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium mb-4">
-                CONVEY license-free walkie-talkies are approved by the WPC (Wireless Planning & Coordination) Wing, Ministry of Communications, Government of India. 
-              </p>
-              <ul className="space-y-3">
-                {[
-                  "Users must operate devices within the allocated PMR 446.0 – 446.2 MHz frequency band.",
-                  "Any modification to the internal circuitry or antenna of the device is strictly prohibited.",
-                  "Compliance with local wireless communication laws is the sole responsibility of the end-user."
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start text-sm font-medium text-gray-500">
-                    <span className="text-brand mr-3">/</span> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <FileText className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">3. Intellectual Property</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium">
-                The brand name "CONVEY", its logo, product designs, and technical documentation are the exclusive intellectual property of Micromap Electronic Systems Limited Unauthorized reproduction, distribution, or commercial use of these assets is prohibited.
-              </p>
-            </div>
-
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <AlertCircle className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">4. Limitation of Liability</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium">
-                Micromap Electronic Systems Limited shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use our products, even if we have been advised of the possibility of such damages.
-              </p>
-            </div>
-
-            <div className="pt-16 border-t border-gray-100 text-center">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
-                Last Updated: January 2026 | Micromap Electronic Systems Limited
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+const sections: LegalSection[] = [
+  { id: "website", title: "About this website", content: <><p>This website presents the CONVEY product range and provides a way to contact Micromap Electronic Systems Limited about professional radio communication solutions. These terms apply to your use of this website.</p><p>If you do not agree with these terms, please stop using the website. You can contact our team if you have a question about them.</p></> },
+  { id: "product-information", title: "Product information", content: <><p>Product pages, images, specifications, and downloadable brochures are provided to help you evaluate our range. Features, accessories, availability, and configurations may vary by model. Items marked optional are not necessarily included as standard.</p><p>Before placing an order, ask our sales team to confirm the exact model, frequency band, included accessories, optional features, and specifications for your requirements. Product images are illustrative and may differ from the supplied configuration.</p></> },
+  { id: "inquiries", title: "Inquiries, quotes & orders", content: <><p>This website is a product catalog and inquiry service. Sending an inquiry or requesting a quote does not place an order, reserve stock, or create a purchase agreement.</p><p>Pricing, taxes, delivery, installation, payment, warranty, returns, and service arrangements must be confirmed in the applicable quotation or sales agreement. These website terms do not replace those agreed commercial terms.</p></> },
+  { id: "radio-operation", title: "Radio selection & operation", content: <><p>The catalog includes different categories of radios and repeaters. License-free descriptions apply only to the relevant models and configurations; they do not apply to the entire CONVEY range.</p><p>Confirm the operating frequencies, approvals, licensing requirements, and suitability of a device for your intended location and use before purchase or deployment. Follow the supplied instructions and use appropriate installation and service support. Do not assume that optional safety features or hazardous-area suitability apply to every model.</p><p>Visit our <Link to="/compliance">compliance information</Link> or contact our team for model-specific guidance.</p></> },
+  { id: "acceptable-use", title: "Acceptable website use", content: <><p>Use the website for lawful browsing, product evaluation, and genuine business inquiries. Provide accurate contact details when submitting a form.</p><p>Do not submit malicious code, spam, misleading requests, or information you are not authorized to share. Do not attempt to gain unauthorized access to the website or interfere with its operation.</p></> },
+  { id: "materials", title: "Website materials & external links", content: <><p>The CONVEY name, branding, text, images, and documents are protected by the rights of their respective owners. You may view and download product information for evaluating products. Other reproduction or commercial reuse requires permission from the relevant rights holder.</p><p>Links to external websites, maps, or messaging services are provided for convenience. Those services have their own terms and privacy policies, and their availability and content are outside our control.</p></> },
+  { id: "availability", title: "Accuracy, availability & changes", content: <><p>Information may be updated or corrected, and the website may occasionally be unavailable. Confirm information that is important to your procurement or deployment directly with our team. Website content alone should not be treated as a guarantee of performance in a particular operating environment.</p><p>These terms may change as the website evolves. The date at the top identifies the latest content update. Nothing in these terms is intended to exclude rights or responsibilities that cannot lawfully be excluded.</p></> },
+  { id: "contact", title: "Privacy & contact", content: <><p>Our <Link to="/privacy">Privacy Policy</Link> explains the information involved when you use the website or send an inquiry.</p><p>For questions about these terms, email <a href="mailto:sales@conveyindia.in">sales@conveyindia.in</a> or call <a href="tel:+917619720000">+91 76197 20000</a>.</p><address>Micromap Electronic Systems Limited<br/>4th Floor Royal Plaza, Munshipulia, Indira Nagar,<br/>Lucknow (U.P), India - 226 016.</address></> },
+];
+export const Terms = () => <LegalPage title="Terms & Conditions" description="The terms for using the CONVEY website, browsing product information, and contacting our sales team." sections={sections}/>;

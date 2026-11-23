@@ -1,12 +1,14 @@
 import React from "react";
-import { Phone, Mail, MapPin, Send, UserPlus, Building2, Globe, Printer } from "lucide-react";
+import { Phone, Mail, MapPin, UserPlus, Building2, Globe, Printer, ArrowUpRight, ArrowRight, Clock3, MessageSquare } from "lucide-react";
+import { useSearchParams } from "react-router";
+import "./contact.css";
 import { SEO } from "@/app/components/SEO";
 
 const offices = [
   {
     city: "Lucknow",
     type: "Head Office",
-    address: "215-217, 2nd Floor, Lekhraj Gold, Indira Nagar, Lucknow-226016 (UP), India.",
+    address: "4th Floor Royal Plaza, Munshipulia, Indira Nagar, Lucknow (U.P), India - 226 016.",
     phones: ["+91 522 4010095", "+91 91519 15146"],
     fax: "4082161",
     email: "sales@conveyindia.in"
@@ -48,6 +50,8 @@ const encodeFormData = (formData: FormData) =>
   ).toString();
 
 export const Contact = () => {
+  const [searchParams] = useSearchParams();
+  const model = searchParams.get("model");
   const [submitted, setSubmitted] = React.useState(false);
   const [submitError, setSubmitError] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
@@ -78,68 +82,33 @@ export const Contact = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
-      <SEO 
-        title="Contact Us | Authorized CONVEY Dealer Network"
-        description="Get in touch with CONVEY for enterprise wireless solutions. Contact our Lucknow HQ or regional offices in Delhi, Mumbai, Kolkata, and Hyderabad."
-        keywords="convey contact number, micromap lucknow address, walkie talkie dealer india, sales@conveyindia.in"
-      />
+    <div className="contact-page">
+      <SEO title="Contact Us | CONVEY Sales & Support"
+        description="Speak to CONVEY about professional radio communication. Contact our sales team or find an office in Lucknow, Delhi, Mumbai, Kolkata, or Hyderabad."
+        keywords="convey contact number, micromap lucknow address, walkie talkie dealer india, sales@conveyindia.in" />
 
-      {/* Editorial Header */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center space-x-4 mb-8">
-            <div className="h-px w-12 bg-brand"></div>
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-brand">Direct Connectivity</span>
+      <section className="ct-hero"><div className="ct-container">
+        <div><span className="ct-eyebrow"><span /> Contact CONVEY</span><h1>Good communication<br />starts with <em>a conversation.</em></h1><p>From your first radio to a complete communication network,<br className="hidden sm:block" /> let’s find the right solution for your team.</p></div>
+        <a href="#inquiry" className="ct-hero-link"><span className="ct-round-arrow"><ArrowRight size={24} /></span>Let’s talk about your project</a>
+      </div></section>
+
+      <section className="ct-main ct-container">
+        <aside className="ct-connect">
+          <span className="ct-eyebrow">Here to help you connect</span><h2>Real people.<br /><em>Reliable support.</em></h2><p>Product guidance, project requirements, or dealer partnerships. Our team is here to help you take the next step.</p>
+          <div className="ct-direct-card">
+            <span className="ct-card-caption"><span /> Technical sales & support</span>
+            <a href="tel:+917619720000" className="ct-phone"><Phone size={21} /><span>+91 76197 20000</span><ArrowUpRight size={19} /></a>
+            <div className="ct-hours"><Clock3 size={14} /><span>Monday – Saturday<br /><strong>10:00 AM – 6:00 PM</strong></span></div>
+            <a href="mailto:sales@conveyindia.in" className="ct-email"><Mail size={19} /><span><small>Prefer to write?</small>sales@conveyindia.in</span><ArrowUpRight size={17} /></a>
           </div>
-          <h1 className="text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
-            Get In <span className="text-brand">Touch</span>
-          </h1>
-          <p className="text-lg font-medium leading-relaxed text-gray-500 max-w-2xl">
-            Enterprise communication requires precise coordination. Our technical sales team is available across India to support your mission-critical requirements.
-          </p>
-        </div>
-      </section>
-
-      {/* Main Inquiry Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-            {/* Quick Contact Info */}
-            <div className="lg:col-span-5">
-              <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand mb-12">Primary Hotline</h2>
-              <div className="bg-navy p-12 rounded-xl text-white shadow-2xl relative overflow-hidden mb-12">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand/10 -mr-16 -mt-16 rounded-full blur-3xl"></div>
-                <div className="relative z-10">
-                  <Phone className="w-10 h-10 text-brand mb-8" aria-hidden="true" />
-                  <p className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-400 mb-4">Enterprise Support</p>
-                  <p className="text-4xl font-black tracking-tighter mb-4">+91 76197 20000</p>
-                  <p className="text-sm font-medium text-gray-400 mb-12 leading-relaxed">Available Monday - Saturday (10 AM - 6 PM)</p>
-                  
-                  <div className="pt-10 border-t border-white/10">
-                    <Mail className="w-5 h-5 text-brand mb-4" aria-hidden="true" />
-                    <p className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-400 mb-2">Technical Sales</p>
-                    <p className="text-lg font-black tracking-tighter uppercase">sales@conveyindia.in</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-8 bg-gray-50 border border-gray-100 rounded-lg group cursor-pointer hover:border-brand transition-all">
-                  <UserPlus className="w-8 h-8 text-brand mb-4" aria-hidden="true" />
-                  <p className="text-[9px] font-black uppercase tracking-widest text-navy">Become a Dealer</p>
-                </div>
-                <div className="p-8 bg-gray-50 border border-gray-100 rounded-lg group cursor-pointer hover:border-brand transition-all">
-                  <Building2 className="w-8 h-8 text-brand mb-4" aria-hidden="true" />
-                  <p className="text-[9px] font-black uppercase tracking-widest text-navy">Corporate Sales</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Form */}
-            <div className="lg:col-span-7" id="inquiry">
-              <div className="p-12 lg:p-16 border border-gray-100 bg-white shadow-sm rounded-xl">
-                <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand mb-12">Inquiry Form</h2>
+          <div className="ct-pathways">
+            <a href="mailto:sales@conveyindia.in?subject=Dealer%20partnership%20inquiry"><UserPlus size={21}/><div><strong>Become a dealer</strong><span>Grow with the CONVEY network</span></div><ArrowUpRight size={17}/></a>
+            <a href="mailto:sales@conveyindia.in?subject=Corporate%20sales%20inquiry"><Building2 size={21}/><div><strong>Corporate sales</strong><span>Solutions for teams at every scale</span></div><ArrowUpRight size={17}/></a>
+          </div>
+        </aside>
+        <div id="inquiry" className="ct-inquiry">
+          <div className="ct-form-heading"><span className="ct-form-icon"><MessageSquare size={22}/></span><div><span className="ct-eyebrow">Tell us what you need</span><h2>How can we help?</h2></div></div>
+          <p className="ct-form-description">Share a few details and our sales team will get in touch.</p>
                 <form
                   name="convey-inquiry"
                   method="POST"
@@ -147,7 +116,7 @@ export const Contact = () => {
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
-                  className="space-y-8"
+                  className="ct-form"
                   aria-busy={submitting}
                 >
                   <input type="hidden" name="form-name" value="convey-inquiry" />
@@ -156,116 +125,68 @@ export const Contact = () => {
                       Do not fill this out: <input name="bot-field" tabIndex={-1} />
                     </label>
                   </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label htmlFor="name" className="text-[9px] font-black uppercase tracking-widest text-gray-400">Full Name</label>
-                      <input id="name" name="name" required type="text" autoComplete="name" className="w-full bg-gray-50 border border-gray-100 p-4 font-medium text-sm outline-none focus:ring-1 focus:ring-brand" placeholder="Your Full Name" />
+                  <div className="ct-form-row">
+                    <div className="ct-field">
+                      <label htmlFor="name" className="ct-field-label">Full Name</label>
+                      <input id="name" name="name" required type="text" autoComplete="name" className="ct-input" placeholder="Your full name" />
                     </div>
-                    <div className="space-y-3">
-                      <label htmlFor="company" className="text-[9px] font-black uppercase tracking-widest text-gray-400">Company</label>
-                      <input id="company" name="company" required type="text" autoComplete="organization" className="w-full bg-gray-50 border border-gray-100 p-4 font-medium text-sm outline-none focus:ring-1 focus:ring-brand" placeholder="Organization Name" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label htmlFor="phone" className="text-[9px] font-black uppercase tracking-widest text-gray-400">Phone</label>
-                      <input id="phone" name="phone" required type="tel" autoComplete="tel" className="w-full bg-gray-50 border border-gray-100 p-4 font-medium text-sm outline-none focus:ring-1 focus:ring-brand" placeholder="Mobile Number" />
-                    </div>
-                    <div className="space-y-3">
-                      <label htmlFor="email" className="text-[9px] font-black uppercase tracking-widest text-gray-400">Email</label>
-                      <input id="email" name="email" required type="email" autoComplete="email" className="w-full bg-gray-50 border border-gray-100 p-4 font-medium text-sm outline-none focus:ring-1 focus:ring-brand" placeholder="Business Email" />
+                    <div className="ct-field">
+                      <label htmlFor="company" className="ct-field-label">Company</label>
+                      <input id="company" name="company" required type="text" autoComplete="organization" className="ct-input" placeholder="Your organization" />
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <label htmlFor="requirement" className="text-[9px] font-black uppercase tracking-widest text-gray-400">Message / Requirement</label>
-                    <textarea id="requirement" name="requirement" required rows={4} className="w-full bg-gray-50 border border-gray-100 p-4 font-medium text-sm outline-none focus:ring-1 focus:ring-brand resize-none" placeholder="Describe your requirement..."></textarea>
+                  <div className="ct-form-row">
+                    <div className="ct-field">
+                      <label htmlFor="phone" className="ct-field-label">Phone</label>
+                      <input id="phone" name="phone" required type="tel" autoComplete="tel" className="ct-input" placeholder="+91" />
+                    </div>
+                    <div className="ct-field">
+                      <label htmlFor="email" className="ct-field-label">Email</label>
+                      <input id="email" name="email" required type="email" autoComplete="email" className="ct-input" placeholder="you@company.com" />
+                    </div>
+                  </div>
+                  <div className="ct-field">
+                    <label htmlFor="requirement" className="ct-field-label">Message / Requirement</label>
+                    <textarea id="requirement" name="requirement" required rows={5} defaultValue={model ? `I would like to enquire about ${model}.` : ""} className="ct-input" placeholder="Tell us about your project, products of interest, or the number of radios you need…"></textarea>
                   </div>
                   {submitError && (
-                    <p role="alert" className="rounded bg-red-50 px-4 py-3 text-xs font-bold text-red-700">
+                    <p role="alert" className="ct-feedback ct-error">
                       Something went wrong. Please email sales@conveyindia.in or try again.
                     </p>
                   )}
                   {submitted && (
-                    <p role="status" className="rounded bg-green-50 px-4 py-3 text-xs font-bold text-green-700">
+                    <p role="status" className="ct-feedback ct-success">
                       Thank you. Your inquiry has been received. Our sales team will contact you shortly.
                     </p>
                   )}
+                  <p className="ct-form-note">All fields are required. We’ll use your details to respond to your inquiry.</p>
                   <button
                     type="submit"
                     disabled={submitting || submitted}
-                    className={`w-full py-5 rounded font-black uppercase tracking-[0.2em] text-[10px] transition-all flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-70 ${
-                      submitted ? "bg-green-600 text-white" : "bg-brand text-navy hover:bg-brand/90"
-                    }`}
+                    className="ct-submit"
                   >
-                    {submitted ? "Message Sent Successfully" : submitting ? "Sending Inquiry…" : "Submit Inquiry"}
-                    {!submitted && !submitting && <Send className="ml-3 w-3 h-3" />}
+                    {submitted ? "Inquiry received" : submitting ? "Sending Inquiry…" : "Send inquiry"}
+                    {!submitted && !submitting && <ArrowUpRight size={19} aria-hidden="true" />}
                   </button>
                 </form>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Detailed Office Locations Grid */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-20">
-            <h2 className="text-4xl font-black text-navy uppercase tracking-tighter">Our Presence <span className="text-brand">Across India</span></h2>
-            <Globe className="w-10 h-10 text-brand/20" aria-hidden="true" />
-          </div>
+      <section className="ct-offices" id="offices"><div className="ct-container">
+        <div className="ct-offices-heading"><div><span className="ct-eyebrow">Local expertise. National reach.</span><h2>Closer to <em>your business.</em></h2><p>Connect with our head office or a regional team near you.</p></div><span className="ct-office-count"><Globe size={19}/> 5 offices across India</span></div>
+        <div className="ct-office-grid">{offices.map((office,index)=><article className={`ct-office ${index===0 ? "ct-office-head" : ""}`} key={office.city}>
+          <div className="ct-office-top"><span className="ct-office-number">0{index+1}</span><span className="ct-office-type">{office.type}</span></div>
+          <h3>{office.city}<MapPin size={21}/></h3>
+          <address>{office.address}</address>
+          <div className="ct-office-phones">{office.phones.map(phone=><a key={phone} href={`tel:${phone.replace(/[^+0-9]/g, "")}`}><Phone size={13}/>{phone}</a>)}{office.fax && <span><Printer size={13}/>Fax: {office.fax}</span>}</div>
+          <a className="ct-office-email" href={`mailto:${office.email}`}><Mail size={14}/>{office.email}</a>
+          <a className="ct-directions" target="_blank" rel="noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.address)}`}>Get directions <ArrowUpRight size={16}/></a>
+        </article>)}</div>
+      </div></section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200 border border-gray-200">
-            {offices.map((office) => (
-              <div key={office.city} className="bg-white p-12 hover:bg-gray-50/50 transition-colors">
-                <div className="flex items-center justify-between mb-8">
-                  <h3 className="text-2xl font-black uppercase tracking-tighter text-navy">{office.city}</h3>
-                  <span className="text-[8px] font-black uppercase tracking-widest bg-brand/10 text-brand px-3 py-1 rounded-full">{office.type}</span>
-                </div>
-                
-                <div className="space-y-8">
-                  <div className="flex items-start space-x-4">
-                    <MapPin className="w-4 h-4 text-brand mt-1 flex-shrink-0" aria-hidden="true" />
-                    <address className="text-sm font-medium leading-relaxed text-gray-500 not-italic">{office.address}</address>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-gray-400">Contact Channels</p>
-                    {office.phones.map(phone => (
-                      <div key={phone} className="flex items-center space-x-4 text-navy">
-                        <Phone className="w-3 h-3 text-brand" aria-hidden="true" />
-                        <span className="text-xs font-black tracking-tight">{phone}</span>
-                      </div>
-                    ))}
-                    {office.fax && (
-                      <div className="flex items-center space-x-4 text-gray-400">
-                        <Printer className="w-3 h-3 text-brand" aria-hidden="true" />
-                        <span className="text-xs font-black tracking-tight">Fax: {office.fax}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="pt-8 border-t border-gray-100 flex items-center space-x-4">
-                    <Mail className="w-3 h-3 text-brand" aria-hidden="true" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-navy lowercase">{office.email}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final Quote Section */}
-      <section className="py-24 border-t border-gray-100">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-2xl lg:text-3xl font-black text-navy uppercase tracking-tighter leading-tight mb-8">
-            "Authorized by WPC, Government of India, for wireless network solutions and services."
-          </p>
-          <div className="h-px w-20 bg-brand mx-auto mb-8"></div>
-          <p className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-400">Micromap Electronic Systems Limited</p>
-        </div>
-      </section>
+      <section className="ct-bottom"><div className="ct-container"><div className="ct-bottom-icon"><RadioIcon /></div><div><span className="ct-eyebrow">Every connection matters</span><h2>Let’s keep your team connected.</h2><p>Professional communication. Personal attention.</p></div><a href="tel:+917619720000">Talk to our team <ArrowUpRight size={18}/></a></div></section>
     </div>
   );
 };
+
+const RadioIcon = () => <Globe size={30} aria-hidden="true" />;

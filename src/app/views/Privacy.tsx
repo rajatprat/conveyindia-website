@@ -1,82 +1,16 @@
 import React from "react";
-import { Shield, FileText, Lock, Eye } from "lucide-react";
-import { SEO } from "@/app/components/SEO";
+import { Link } from "react-router";
+import { LegalPage, LegalSection } from "@/app/components/LegalPage";
 
-export const Privacy = () => {
-  return (
-    <div className="bg-white min-h-screen">
-      <SEO 
-        title="Privacy Policy | Data Protection Standards"
-        description="Learn how CONVEY and Micromap Electronic Systems Limited handle business information. Transparency regarding data integrity and Indian legal compliance."
-      />
-
-      {/* Editorial Header */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center space-x-4 mb-8">
-            <div className="h-px w-12 bg-brand"></div>
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-brand">Data Integrity</span>
-          </div>
-          <h1 className="text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
-            Privacy <span className="text-brand">Policy</span>
-          </h1>
-          <p className="text-lg font-medium leading-relaxed text-gray-500 max-w-2xl">
-            Transparency regarding how Micromap Electronic Systems Limited handles information for our enterprise clients.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16">
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <Eye className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">1. Information Collection</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium">
-                We collect information necessary to provide professional wireless solutions, including business contact details, organization names, and technical requirements provided via our inquiry forms. We do not collect sensitive personal identifiable information (PII) beyond what is required for business-to-business communication.
-              </p>
-            </div>
-
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <Lock className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">2. Data Usage</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium">
-                Information provided is exclusively used to process your inquiries, provide technical support, and fulfill product orders. We do not sell or lease our database to third-party marketing organizations.
-              </p>
-            </div>
-
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <Shield className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">3. Security Standards</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium">
-                Micromap Electronic Systems Limited implements industry-standard security measures to protect against unauthorized access, alteration, or disclosure of your business information.
-              </p>
-            </div>
-
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <FileText className="w-5 h-5 text-brand" />
-                <h2 className="text-xl font-black uppercase tracking-tighter text-navy">4. Compliance with Indian Law</h2>
-              </div>
-              <p className="text-gray-500 leading-relaxed font-medium">
-                This policy is governed by and construed in accordance with the Information Technology Act, 2000 and other relevant data protection guidelines issued by the Government of India.
-              </p>
-            </div>
-
-            <div className="pt-16 border-t border-gray-100 text-center">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
-                Effective Date: January 2026 | Micromap Electronic Systems Limited
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+const analyticsEnabled = Boolean(import.meta.env.VITE_GA_MEASUREMENT_ID || import.meta.env.VITE_GTM_ID);
+const sections: LegalSection[] = [
+  { id: "scope", title: "Who this policy covers", content: <><p>This policy describes information involved when you browse the CONVEY website or contact Micromap Electronic Systems Limited through the website. It covers website visitors and people making product, sales, support, or dealer inquiries.</p><p>External services you choose to open, including maps and WhatsApp, have their own privacy policies.</p></> },
+  { id: "information", title: "Information you provide", content: <><p>The inquiry form asks for your full name, company, phone number, email address, and message or requirement. A product name may be prefilled when you arrive from a product page; you can edit it before sending the form.</p><p>If you contact us by email, phone, or WhatsApp, you also provide the information contained in that communication. Please include only information relevant to your inquiry. Do not send passwords, payment card details, identity documents, or other sensitive personal information through the inquiry form.</p></> },
+  { id: "purposes", title: "How inquiry information is used", content: <><p>Information you submit is used to respond to your request, discuss product suitability, prepare quotations, coordinate a requested follow-up, or address a support or dealer inquiry. Relevant details may need to be shared with the team handling your request.</p><p>The website does not provide a customer account or an online checkout. An inquiry form submission is not a purchase or payment.</p></> },
+  { id: "technical", title: "Technical data, cookies & analytics", content: <><p>When your browser requests a website page or an external resource, the receiving service may process technical information such as an IP address, browser or device information, request time, and the requested page or file.</p><p>{analyticsEnabled ? "This website build has Google Analytics and/or Google Tag Manager configured. These tools can process page views, interactions, and browser or device information. Cookies or similar technologies may be used depending on the configured tools and your browser settings." : "Google Analytics and Google Tag Manager are not configured in this website build. If analytics are enabled in a future build, this section will identify their use."}</p><p>You can manage cookies through your browser settings. Read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noreferrer">how Google processes information from partner websites</a> and <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noreferrer">Google’s cookie information</a> for details about those services.</p></> },
+  { id: "providers", title: "Forms & third-party services", content: <><p>The inquiry form is configured for Netlify Forms. When form handling is enabled on the deployed website, submissions are processed through that service. Hosting and form services may process technical data and submitted information to operate the website and deliver inquiries.</p><p>Some photographs and media load from external services. Your browser connects to those services when the content is requested. Opening a map, email link, or WhatsApp link connects you to the provider you choose.</p><p>For the form provider’s information, see <a href="https://www.netlify.com/privacy/" target="_blank" rel="noreferrer">Netlify’s Privacy Statement</a>. Third-party services may process information in locations outside India.</p></> },
+  { id: "retention", title: "Retention & security", content: <><p>Inquiry records can exist in form submissions, email correspondence, and subsequent business communications. The period for keeping a record depends on the inquiry, any resulting business relationship, and applicable record-keeping requirements.</p><p>No internet transmission or storage system can be guaranteed completely secure. Please contact us if you believe you sent information in error or want to ask about a particular record, its retention, or its deletion.</p></> },
+  { id: "choices", title: "Your choices & requests", content: <><p>You can browse product information without sending an inquiry. If you want to ask about information you provided, request a correction or deletion, or stop a follow-up, email <a href="mailto:sales@conveyindia.in?subject=Privacy%20request">sales@conveyindia.in</a> with “Privacy request” in the subject.</p><p>Include enough information to identify your inquiry, but do not send sensitive identity documents unless specifically requested through an appropriate channel. Additional details may be needed to verify a request. Available actions may depend on applicable requirements and records that need to be retained.</p></> },
+  { id: "contact", title: "Contact & policy updates", content: <><p>Questions about this policy can be sent to <a href="mailto:sales@conveyindia.in?subject=Privacy%20question">sales@conveyindia.in</a> or raised by calling <a href="tel:+917619720000">+91 76197 20000</a>. Our <Link to="/contact">contact page</Link> lists regional offices.</p><address>Micromap Electronic Systems Limited<br/>4th Floor Royal Plaza, Munshipulia, Indira Nagar,<br/>Lucknow (U.P), India - 226 016.</address><p>This policy may be updated when the website or its services change. The date at the top identifies the latest update.</p></> },
+];
+export const Privacy = () => <LegalPage title="Privacy Policy" description="How information is handled when you browse our website, submit an inquiry, or contact the CONVEY team." sections={sections}/>;

@@ -1,8 +1,9 @@
 import React from "react";
 import { useParams, Link } from "react-router";
-import { CheckCircle2, Phone, Download, ShieldCheck, Zap, Battery, Radio, Globe, ChevronLeft } from "lucide-react";
+import { CheckCircle2, Phone, Download, ShieldCheck, Radio, Globe, ChevronLeft, ArrowUpRight, ArrowRight, FileText } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { SEO } from "@/app/components/SEO";
+import "./product-detail.css";
 import { PRODUCT_DATA } from "@/app/constants/product-data";
 
 export const ProductDetail = () => {
@@ -17,6 +18,8 @@ export const ProductDetail = () => {
       </div>
     );
   }
+
+  const isDmrProduct = product.category.startsWith("DMR");
 
   // Generate Product Schema for search engines
   const productSchema = {
@@ -40,131 +43,72 @@ export const ProductDetail = () => {
     }
   };
 
+  const modelName = product.name.replace(/^CONVEY /, "");
+  const highlights = ["RF Power Output", "RF Power", "Channels", "Battery", "Protection Rating", "Protection", "Duty Cycle"]
+    .map((label) => product.specs.find((spec) => spec.label === label))
+    .filter((spec): spec is NonNullable<typeof spec> => Boolean(spec))
+    .slice(0, 3);
+  const relatedProducts = Object.values(PRODUCT_DATA)
+    .filter((item) => item.category === product.category && item.id !== product.id)
+    .slice(0, 3);
+
   return (
-    <div className="bg-white min-h-screen">
-      <SEO 
-        title={`${product.name} | ${product.tagline}`}
-        description={`${product.name}: ${product.description.substring(0, 160)}...`}
-        keywords={`convey ${product.name}, license free walkie talkie specifications, pmr 446 india, professional radio features`}
-        schemaData={productSchema}
-      />
+    <div className="product-detail">
+      <SEO title={`${product.name} | ${product.tagline}`}
+        description={product.description.substring(0, 160)}
+        keywords={`${product.name}, ${product.category}, professional radio specifications`}
+        schemaData={productSchema} />
 
-      {/* Hero / Visual Section */}
-      <section className="pt-32 pb-24 bg-gray-50/30 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/products" className="inline-flex items-center text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-brand mb-12 transition-colors">
-            <ChevronLeft className="w-3 h-3 mr-2" aria-hidden="true" /> Back to Catalog
-          </Link>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="relative flex justify-center lg:justify-center">
-              <div className="absolute inset-0 bg-brand/5 rounded-full blur-[120px] -z-10 scale-150"></div>
-              <ImageWithFallback
-                src={product.image}
-                alt={`${product.name} license-free two-way radio`}
-                className="w-full max-w-[620px] max-h-[620px] h-auto rounded-xl object-contain shadow-2xl shadow-navy/10 ring-1 ring-gray-100 transition-transform duration-700 hover:scale-[1.02]"
-              />
+      <section className="pd-hero">
+        <div className="pd-container">
+          <div className="pd-breadcrumb">
+            <Link to="/products"><ChevronLeft size={14} /> Products</Link>
+            <span>/</span><span>{product.category}</span><span>/</span><strong>{modelName}</strong>
+          </div>
+          <div className="pd-hero-grid">
+            <div className="pd-stage">
+              <div className="pd-stage-top"><span className="pd-label">CONVEY / {product.category}</span><Radio size={19} /></div>
+              <ImageWithFallback src={product.image} alt={`${product.name} ${product.category}`} className="pd-product-image" />
+              <div className="pd-stage-bottom"><span>{modelName}</span><span>Built to keep you connected.</span></div>
             </div>
-
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-brand mb-6 block">Model Portfolio</span>
-              <h1 className="text-5xl lg:text-7xl font-black text-navy tracking-tighter uppercase mb-8 leading-[0.9]">
-                {product.name}
-              </h1>
-              <p className="text-xl font-black text-brand uppercase tracking-widest mb-10">
-                {product.tagline}
-              </p>
-              <p className="text-lg text-gray-500 font-medium leading-relaxed mb-12">
-                {product.description}
-              </p>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <Link to="/contact" className="bg-navy text-white px-10 py-5 rounded font-black uppercase tracking-widest text-xs hover:bg-navy/90 transition-all text-center">
-                  Request Quote
-                </Link>
-                <a
-                  href={product.brochureUrl || "/catalogs/convey-handheld-radios.pdf"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-gray-100 text-navy px-10 py-5 rounded font-black uppercase tracking-widest text-xs hover:bg-gray-200 transition-all flex items-center justify-center"
-                >
-                  <Download className="w-4 h-4 mr-3" aria-hidden="true" /> Brochure
-                </a>
+            <div className="pd-intro">
+              <span className="pd-eyebrow"><span /> Professional communication</span>
+              <p className="pd-brand-name">CONVEY</p>
+              <h1>{modelName}</h1>
+              <p className="pd-tagline">{product.tagline}</p>
+              <p className="pd-description">{product.description}</p>
+              <div className="pd-highlights">
+                {highlights.map((spec) => <div key={spec.label}><span>{spec.label}</span><strong>{spec.value}</strong></div>)}
               </div>
+              <div className="pd-actions">
+                <Link to={`/contact?model=${encodeURIComponent(product.name)}#inquiry`} className="pd-button pd-primary">Request a quote <ArrowUpRight size={18} /></Link>
+                <a href={product.brochureUrl || "/catalogs/convey-handheld-radios.pdf"} target="_blank" rel="noreferrer" className="pd-button pd-secondary"><Download size={17} /> Download brochure</a>
+              </div>
+              <p className="pd-help">Need help choosing? <a href="tel:+917619720000">Talk to our team <ArrowUpRight size={12} /></a></p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Technical Specifications */}
-      <section className="py-24 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-            <div className="lg:col-span-7">
-              <h2 className="text-3xl font-black text-navy uppercase tracking-tighter mb-12">Technical <span className="text-brand">Specifications</span></h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-100 border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-                {product.specs.map((spec) => (
-                  <div key={spec.label} className="bg-white p-8">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">{spec.label}</p>
-                    <p className="text-sm font-black uppercase tracking-widest text-navy">{spec.value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <nav className="pd-section-nav" aria-label="Product sections"><div className="pd-container"><span>{modelName}</span><div><a href="#specifications">Specifications</a><a href="#features">Key features</a>{relatedProducts.length > 0 && <a href="#related">Explore more</a>}</div><a className="pd-nav-download" href={product.brochureUrl || "/catalogs/convey-handheld-radios.pdf"} target="_blank" rel="noreferrer"><FileText size={16} /> Brochure <ArrowUpRight size={14} /></a></div></nav>
 
-            <div className="lg:col-span-5">
-              <h2 className="text-3xl font-black text-navy uppercase tracking-tighter mb-12">Core <span className="text-brand">Advantages</span></h2>
-              <div className="space-y-6">
-                {product.features.map((feature) => (
-                  <div key={feature} className="flex items-center p-6 bg-gray-50 border border-gray-100 rounded-lg group hover:border-brand/30 transition-all">
-                    <CheckCircle2 className="w-5 h-5 text-brand mr-4" aria-hidden="true" />
-                    <span className="text-xs font-black uppercase tracking-widest text-navy">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+      <section className="pd-details pd-container">
+        <div id="specifications" className="pd-specifications">
+          <div className="pd-section-heading"><span className="pd-eyebrow">01 / The details</span><h2>Precision in every<br /><em>specification.</em></h2><p>Everything you need to plan your deployment.</p></div>
+          <dl className="pd-spec-table">{product.specs.map((spec) => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl>
+        </div>
+        <div id="features" className="pd-features">
+          <div className="pd-section-heading"><span className="pd-eyebrow">02 / Capabilities</span><h2>Designed for<br /><em>the way you work.</em></h2><p>Professional features. Practical advantages.</p></div>
+          <div className="pd-feature-list">{product.features.map((feature, index) => <div key={feature}><span className="pd-feature-index">{String(index + 1).padStart(2, "0")}</span><span>{feature}</span><CheckCircle2 size={18} /></div>)}</div>
+          <a className="pd-document-card" href={product.brochureUrl || "/catalogs/convey-handheld-radios.pdf"} target="_blank" rel="noreferrer"><span className="pd-document-icon"><FileText size={25} /></span><div><strong>Take a closer look.</strong><span>Download the complete product brochure</span></div><ArrowUpRight size={22} /></a>
         </div>
       </section>
 
-      {/* Compliance Strip */}
-      <section className="py-16 bg-navy text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-between items-center gap-10">
-            {[
-              { label: "WPC ETA Approved", icon: Globe },
-              { label: "License-Free Operation", icon: ShieldCheck },
-              { label: "PMR 446 Standards", icon: Radio },
-              { label: "High-Density Battery", icon: Battery },
-              { label: "Instant Connection", icon: Zap }
-            ].map((item) => (
-              <div key={item.label} className="flex items-center space-x-4">
-                <item.icon className="w-5 h-5 text-brand" aria-hidden="true" />
-                <span className="text-[10px] font-black uppercase tracking-widest">{item.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {!isDmrProduct && <section className="pd-compliance"><div className="pd-container">{[{label:"WPC ETA Approved",icon:Globe},{label:"License-Free Operation",icon:ShieldCheck},{label:"PMR 446 Standards",icon:Radio}].map((item)=><span key={item.label}><item.icon size={18}/>{item.label}</span>)}</div></section>}
 
-      {/* Sales CTA */}
-      <section className="py-24 bg-white text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <Phone className="w-12 h-12 text-brand mx-auto mb-8" aria-hidden="true" />
-          <h2 className="text-4xl lg:text-5xl font-black text-navy uppercase tracking-tighter mb-8">Ready for Enterprise Deployment?</h2>
-          <p className="text-gray-500 font-medium uppercase tracking-widest text-sm mb-12">
-            Speak to our technical experts for volume pricing and authorized dealer locations near you.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link to="/contact" className="bg-brand text-navy px-12 py-5 rounded font-black uppercase tracking-widest text-xs hover:bg-brand/90 transition-all">
-              Contact Sales
-            </Link>
-            <a href="tel:+917619720000" className="bg-navy text-white px-12 py-5 rounded font-black uppercase tracking-widest text-xs hover:bg-navy/90 transition-all">
-              Call +91 76197 20000
-            </a>
-          </div>
-        </div>
-      </section>
+      {relatedProducts.length > 0 && <section id="related" className="pd-related"><div className="pd-container"><div className="pd-related-heading"><div><span className="pd-eyebrow">Keep exploring</span><h2>Find your connection.</h2></div><Link to="/products">View all products <ArrowRight size={18} /></Link></div><div className="pd-related-grid">{relatedProducts.map((item)=><Link to={`/products/${item.id}`} key={item.id} className="pd-related-card"><div><ImageWithFallback src={item.image} alt={item.name} /></div><span>{item.category}</span><h3>{item.name.replace(/^CONVEY /, "")}<ArrowUpRight size={20}/></h3><p>{item.tagline}</p></Link>)}</div></div></section>}
+
+      <section className="pd-contact"><div className="pd-container"><div><span className="pd-eyebrow">Let’s get your team connected</span><h2>The right radio.<br /><em>The right solution.</em></h2><p>Talk to our team about your requirements, product selection,<br className="hidden sm:block" /> and volume pricing.</p></div><div className="pd-contact-actions"><Link to="/contact#inquiry" className="pd-button pd-primary">Contact sales <ArrowUpRight size={19}/></Link><a href="tel:+917619720000"><Phone size={16}/> +91 76197 20000</a></div></div></section>
     </div>
   );
 };

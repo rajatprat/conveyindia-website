@@ -1,112 +1,18 @@
 import React from "react";
 import { Link } from "react-router";
-import { ChevronRight, Radio, Package, Building2, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Network } from "lucide-react";
 import { SEO } from "@/app/components/SEO";
 import { PRODUCT_DATA } from "@/app/constants/product-data";
+import "@/app/components/legal-page.css";
 
 export const Sitemap = () => {
-  const productLinks = Object.values(PRODUCT_DATA).map((product) => ({
-    name: `${product.name} (${product.category})`,
-    path: `/products/${product.id}`,
-  }));
-
-  const sections = [
-    {
-      title: "Main Navigation",
-      icon: Radio,
-      links: [
-        { name: "Home", path: "/" },
-        { name: "Products Catalog", path: "/products" },
-        { name: "About Micromap", path: "/about" },
-        { name: "Certifications & Compliance", path: "/compliance" },
-        { name: "Contact Us & Regional Offices", path: "/contact" }
-      ]
-    },
-    {
-      title: "Product Range",
-      icon: Package,
-      links: productLinks
-    },
-    {
-      title: "Corporate & Legal",
-      icon: Building2,
-      links: [
-        { name: "Terms & Conditions", path: "/terms" },
-        { name: "Privacy Policy", path: "/privacy" },
-        { name: "Sitemap", path: "/sitemap" }
-      ]
-    }
+  const products = Object.values(PRODUCT_DATA);
+  const categories = Array.from(new Set(products.map(product=>product.category)));
+  const groups = [
+    {title:"Explore CONVEY", links:[{name:"Home",path:"/"},{name:"Product catalog",path:"/products"},{name:"About us",path:"/about"},{name:"Compliance information",path:"/compliance"},{name:"Careers",path:"/careers"},{name:"Contact sales",path:"/contact"},{name:"Office locations",path:"/contact#offices"}]},
+    {title:"Industry solutions",links:[{name:"Security services",path:"/industries/security-services"},{name:"Hotels & hospitality",path:"/industries/hospitality"},{name:"Manufacturing",path:"/industries/manufacturing"},{name:"Construction sites",path:"/industries/construction"},{name:"Events & venues",path:"/industries/events"}]},
+    {title:"Website information",links:[{name:"Terms & conditions",path:"/terms"},{name:"Privacy policy",path:"/privacy"},{name:"Sitemap",path:"/sitemap"}]},
+    ...categories.map(category=>({title:category,links:products.filter(product=>product.category===category).map(product=>({name:product.name,path:`/products/${product.id}`}))})),
   ];
-
-  return (
-    <div className="bg-white min-h-screen">
-      <SEO 
-        title="Sitemap | CONVEY Wireless Solutions"
-        description="Navigate through the CONVEY website. Find our full product range of license-free walkie talkies, compliance documents, and regional office locations."
-      />
-
-      {/* Editorial Header */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center space-x-4 mb-8">
-            <div className="h-px w-12 bg-brand"></div>
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-brand">System Architecture</span>
-          </div>
-          <h1 className="text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
-            Site<span className="text-brand">map</span>
-          </h1>
-          <p className="text-lg font-medium leading-relaxed text-gray-500 max-w-2xl">
-            A comprehensive index of CONVEY's digital ecosystem and corporate information.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {sections.map((section) => (
-              <div key={section.title} className="p-10 border border-gray-100 rounded-xl bg-gray-50/20">
-                <div className="flex items-center space-x-4 mb-10">
-                  <section.icon className="w-5 h-5 text-brand" />
-                  <h2 className="text-sm font-black uppercase tracking-[0.2em] text-navy">{section.title}</h2>
-                </div>
-                <ul className="space-y-6">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <Link 
-                        to={link.path} 
-                        className="text-xs font-bold text-gray-500 hover:text-brand transition-colors flex items-center group"
-                      >
-                        <ChevronRight className="w-3 h-3 mr-2 text-brand opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all" />
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-px bg-gray-100 border border-gray-100">
-            <div className="bg-white p-12">
-               <h3 className="text-xs font-black uppercase tracking-[0.3em] text-brand mb-8 flex items-center">
-                 <Mail className="w-4 h-4 mr-3" /> Technical Assistance
-               </h3>
-               <p className="text-sm font-black uppercase tracking-widest text-navy mb-2">+91 76197 20000</p>
-               <p className="text-xs font-bold text-gray-400">sales@conveyindia.in</p>
-            </div>
-            <div className="bg-white p-12">
-               <h3 className="text-xs font-black uppercase tracking-[0.3em] text-brand mb-8 flex items-center">
-                 <MapPin className="w-4 h-4 mr-3" /> Global Headquarters
-               </h3>
-               <p className="text-sm font-bold text-gray-400 leading-relaxed">
-                 Micromap Electronic Systems Limited<br/>
-                 Lucknow, Uttar Pradesh, India
-               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  return <div className="legal-page sitemap-page"><SEO title="Sitemap | CONVEY" description="Find every CONVEY product page, industry solution, office location, and website policy in one place."/><header className="legal-header"><div className="legal-container"><div className="legal-hero-copy"><span className="legal-eyebrow">CONVEY / Find your way</span><h1>Sitemap</h1><p>A clear route to our products, industry solutions, and company information.</p><span className="legal-date">{products.length} models · {categories.length} product categories · 5 industry solutions</span></div><div className="legal-hero-panel"><Network size={42} strokeWidth={1}/><span>Everything connected.<br/>Everything in reach.</span><p>Your guide to CONVEY</p></div></div></header><div className="legal-container sitemap-body"><nav className="sitemap-grid" aria-label="Website directory">{groups.map(group=><section className="sitemap-card" key={group.title}><h2>{group.title}<span>{String(group.links.length).padStart(2,"0")}</span></h2><ul>{group.links.map(link=><li key={link.path}><Link to={link.path}>{link.name}<ArrowUpRight size={14} aria-hidden="true"/></Link></li>)}</ul></section>)}</nav><div className="sitemap-help"><p>Need help finding the right solution?</p><Link to="/contact#inquiry">Talk to our team <ArrowUpRight size={16}/></Link><a href="/sitemap.xml">XML sitemap <ArrowUpRight size={14}/></a></div></div></div>;
 };

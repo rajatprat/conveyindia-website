@@ -10,7 +10,7 @@ const industryData = {
   "security-services": {
     name: "Security Services",
     icon: ShieldCheck,
-    heroImage: "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&q=80&w=1600",
+    heroImage: "/images/industries/handheld-wide.webp",
     headline: "Uninterrupted Coordination for Critical Protection",
     description: "In the security sector, a second's delay can be the difference between safety and a breach. CONVEY provides the rugged, license-free tools needed for constant situational awareness.",
     challenges: [
@@ -30,7 +30,7 @@ const industryData = {
   "hospitality": {
     name: "Hotels & Hospitality",
     icon: Building2,
-    heroImage: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1600",
+    heroImage: "/images/industries/hospitality-wide.webp",
     headline: "Seamless Guest Experience Through Silent Coordination",
     description: "Exceptional service requires invisible coordination. CONVEY radios empower front-desk, housekeeping, and banquet teams to communicate instantly without disturbing the guest environment.",
     challenges: [
@@ -50,7 +50,7 @@ const industryData = {
   "manufacturing": {
     name: "Manufacturing",
     icon: Factory,
-    heroImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600",
+    heroImage: "/images/industries/handheld-wide.webp",
     headline: "Rugged Reliability for the Modern Factory Floor",
     description: "The manufacturing floor is a demanding environment. CONVEY's industrial series is built to withstand dust, vibration, and heavy use while maintaining crystal-clear audio quality.",
     challenges: [
@@ -70,7 +70,7 @@ const industryData = {
   "construction": {
     name: "Construction Sites",
     icon: Zap,
-    heroImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1600",
+    heroImage: "/images/industries/construction-wide.webp",
     headline: "Heavy-Duty Communication for Heavy-Duty Work",
     description: "Manage large construction sites with ease. From crane operators to site engineers, CONVEY provides the range and durability needed for harsh outdoor environments.",
     challenges: [
@@ -90,7 +90,7 @@ const industryData = {
   "events": {
     name: "Events & Venues",
     icon: ShoppingBag,
-    heroImage: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=1600",
+    heroImage: "/images/industries/service-wide.webp",
     headline: "Instant Coordination for Flawless Execution",
     description: "From concerts to corporate exhibitions, the success of an event depends on real-time logistics. CONVEY offers easy-to-use radios that require zero training for temporary staff.",
     challenges: [
